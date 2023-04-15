@@ -1,5 +1,3 @@
-import supabase from "./config/supabaseClient";
-
 const input = document.getElementById('input');
 const searchBtn = document.getElementById('search-btn');
 const notFound = document.querySelector('.not-found');
@@ -26,22 +24,22 @@ let currentRow = 0;
 
 
 async function dataGet() {
-    audioBox.innerHTML = "";
-    notFound.innerText = "";
-    definitionBox.innerText = "";
-    const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
-    const data = await response.json();
-    console.log(response);
-    if (!data.length) {
-        notFound.innerText = 'No result found';
-        return;
-    }
-    let definition = data[0].shortdef[0];// find the result
-    definitionBox.innerText = definition;
-    let sound_name = data[0].hwi.prs[0].sound.audio;
-    if (sound_name) { // if sound is available
-        soundRender(sound_name);
-    }
+    // audioBox.innerHTML = "";
+    // notFound.innerText = "";
+    // definitionBox.innerText = "";
+    // const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
+    // const data = await response.json();
+    // console.log(response);
+    // if (!data.length) {
+    //     notFound.innerText = 'No result found';
+    //     return;
+    // }
+    // let definition = data[0].shortdef[0];// find the result
+    // definitionBox.innerText = definition;
+    // let sound_name = data[0].hwi.prs[0].sound.audio;
+    // if (sound_name) { // if sound is available
+    //     soundRender(sound_name);
+    // }
 }
 
 function setupKeyboard(){
