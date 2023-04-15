@@ -65,6 +65,7 @@ const pushRow = () => {
         newRow.append(newTile);
         blankGuess.push('');
     }
+    newRow.classList.add('guessRow')
     tileBoard.append(newRow);
     guesses.push(blankGuess);
 }
