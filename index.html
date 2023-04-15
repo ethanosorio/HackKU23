@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+    <title>Dictionary App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="header">
+                <h2>Wordo</h2>
+            </div>
+           
+            <div class="tile-container"></div>
+
+            <div class="keyboard">
+                <div class="keyboard-row"></div>
+                <div class="keyboard-row"></div>
+                <div class="keyboard-row"></div>
+            </div>
+
+            <div class="data-section">
+                <p class="def"></p>
+                <!-- <div class="audio"></div> -->
+                <div class="not-found"></div>
+                <button class="btn btn-open">Open Modal</button>
+            </div>
+
+            <div class="modal hidden">
+                <div class="modal-content">
+                    <button class="btn-close">⨉</button>
+                    <div class="audio"></div>
+                    <span>HIDDEN OR AM I</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
 </html>
