@@ -1,7 +1,7 @@
+import supabase from "./config/supabaseClient";
+
 const input = document.getElementById('input');
 const searchBtn = document.getElementById('search-btn');
-
-
 const notFound = document.querySelector('.not-found');
 const definitionBox = document.querySelector('.def');
 const audioBox = document.querySelector('.audio');
