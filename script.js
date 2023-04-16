@@ -4,7 +4,6 @@ const apiKey = import.meta.env.VITE_DICTIONARY_KEY
 
 const input = document.getElementById('input');
 const searchBtn = document.getElementById('search-btn');
-const notFound = document.querySelector('.not-found');
 const definitionBox = document.querySelector('.def');
 const audioBox = document.querySelector('.audio');
 
@@ -33,22 +32,17 @@ const getWord = async () => {
       .select()
       .order('day',{ascending: false})
       .limit(1);      // .eq('day', currentDate);
-    console.log("data: ", data);
-    console.log("word: ", data[0].word);
     word = data[0].word.toUpperCase()
-    console.log(word)
 };
 
 async function dataGet() {
     await getWord();
     audioBox.innerHTML = "";
-    notFound.innerText = "";
     definitionBox.innerText = "";
     const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
     const data = await response.json();
-    console.log(response);
     if (!data.length) {
-        notFound.innerText = 'No result found';
+        console.log('ERROR, Dictionary Call Failed')
         return;
     }
     let definition = data[0].shortdef[0];// find the result
