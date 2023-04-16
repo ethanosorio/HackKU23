@@ -21,7 +21,7 @@
             </div>
             <hr />
             <div class="definition">
-                
+                <p class="def"></p>
             </div>
 
             <div class="tile-container"></div>
@@ -32,16 +32,30 @@
                 <div class="keyboard-row"></div>
             </div>
 
-            <div class="data-section">
-                <p class="def"></p>
-                <!-- <button class="btn btn-open">Open Modal</button> -->
+            <div id="modal1" class="modal hidden"> <!--hidden-->
+                <div class="modal-content">
+                    <button id="btn-close1" class="btn-close">⨉</button>
+                    <h3>Woohoo! You got it in <span id="numTries"></span> tries.</h3>
+                    <p>The word of the day was: </p>
+                    <p>
+                        <b><span id="word"></span></b>
+                        <br />
+                        <span id="wordDef"></span>
+                    </p>
+                    <div class="audio"></div>
+                </div>
             </div>
 
-            <div class="modal hidden">
+            <div id="modal2" class="modal"> <!--hidden-->
                 <div class="modal-content">
-                    <button class="btn-close">⨉</button>
-                    <div class="audio"></div>
-                    <span>HIDDEN OR AM I</span>
+                    <button id="btn-close2" class="btn-close">⨉</button>
+                    <h3>Welcome to Wordo</h3>
+                    <p>The objective of the game is to guess the hidden word.</p>
+                    <p>You are given the definition and the word length.</p>
+                    <p>Letters that are in the secret word are highlighted orange.</p>
+                    <p>Highlighted letters are not in any particular order.</p>
+                    <p>You must unscrabble the anagram of the discovered letters.</p>
+                    </div>
                 </div>
             </div>
 

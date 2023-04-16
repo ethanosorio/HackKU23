@@ -11,9 +11,10 @@ const keyboard = document.querySelector('.keyboard')
 const keyboardRows = document.querySelectorAll('.keyboard-row')
 const tileBoard = document.querySelector('.tile-container')
 
-const modal = document.querySelector(".modal");
-const closeModalBtn = document.querySelector(".btn-close");
-// const openModalBtn = document.querySelector(".btn-open");
+const modal1 = document.querySelector("#modal1");
+const modal2 = document.querySelector("#modal2");
+const closeModalBtn1 = document.querySelector("#btn-close1");
+const closeModalBtn2 = document.querySelector("#btn-close2");
 
 const keys =  [['Q','W','E','R','T','Y','U','I','O','P'], 
             ['A','S','D','F','G','H','J','K','L'], 
@@ -30,13 +31,12 @@ const getWord = async () => {
     const { data, error } = await supabase
       .from("Words")
       .select()
-      .order('day',{ascending: false})
+      .order('id',{ascending: false})
       .limit(1);      // .eq('day', currentDate);
     word = data[0].word.toUpperCase()
 };
 
 async function dataGet() {
-    await getWord();
     audioBox.innerHTML = "";
     definitionBox.innerText = "";
     const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
@@ -47,6 +47,8 @@ async function dataGet() {
     }
     let definition = data[0].shortdef[0];// find the result
     definitionBox.innerText = definition;
+    document.getElementById('wordDef').innerText = definition;
+    document.getElementById('word').innerText = word;
     let sound_name = data[0].hwi.prs[0].sound.audio;
     if (sound_name) { // if sound is available
         soundRender(sound_name);
@@ -81,16 +83,20 @@ const pushRow = () => {
     guesses.push(blankGuess);
 }
 
-const closeModal = () => {modal.classList.add("hidden");}
-closeModalBtn.addEventListener("click", closeModal);
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !modal.classList.contains("hidden")) {closeModal();}
-});
-const openModal = function () {modal.classList.remove("hidden");};
+const closeModal1 = () => {modal1.classList.add("hidden");}
+const closeModal2 = () => {modal2.classList.add("hidden");}
+closeModalBtn1.addEventListener("click", closeModal1);
+closeModalBtn2.addEventListener("click", closeModal2);
+// document.addEventListener("keydown", function (e) {
+//     if (e.key === "Escape" && !modal.classList.contains("hidden")) {closeModal();}
+// });
+const openModal = function () {modal1.classList.remove("hidden");};
 // openModalBtn.addEventListener("click", openModal);
 
 function setup(){
-    dataGet().then(function() {
+    getWord().then(function() {
+        dataGet()
+    }).then(function() {
         pushRow()
     }).then(function() {
         setupKeyboard()
@@ -138,13 +144,14 @@ const checkGuess = () => {
         if (word == guess) {
             // showMessage('Magnificent!')
             console.log("CORRECT")
-            openModal();
+            document.getElementById('numTries').innerHTML = currentRow + 1
+            setTimeout(function() {openModal()}, word.length * 500);
             gameOver = true
             return
         } else {
             currentRow++;
             currentTile = 0;
-            pushRow();
+            setTimeout(function() {pushRow()}, word.length * 500);
         }
     }
 }
