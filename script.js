@@ -1,3 +1,7 @@
+import { supabase } from "./config/supabaseClient";
+
+const apiKey = import.meta.env.VITE_DICTIONARY_KEY
+
 const input = document.getElementById('input');
 const searchBtn = document.getElementById('search-btn');
 const notFound = document.querySelector('.not-found');
@@ -17,29 +21,42 @@ const keys =  [['Q','W','E','R','T','Y','U','I','O','P'],
             ['ENTER','Z','X','C','V','B','N','M','«']]
 const guesses = []
 let guessCount = 0
-let word = "ward".toUpperCase();
+let word = '';
 let gameOver = false;
 let currentTile = 0;
 let currentRow = 0;
 
 
+const getWord = async () => {
+    const { data, error } = await supabase
+      .from("Words")
+      .select()
+      .order('day',{ascending: false})
+      .limit(1);      // .eq('day', currentDate);
+    console.log("data: ", data);
+    console.log("word: ", data[0].word);
+    word = data[0].word.toUpperCase()
+    console.log(word)
+};
+
 async function dataGet() {
-    // audioBox.innerHTML = "";
-    // notFound.innerText = "";
-    // definitionBox.innerText = "";
-    // const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
-    // const data = await response.json();
-    // console.log(response);
-    // if (!data.length) {
-    //     notFound.innerText = 'No result found';
-    //     return;
-    // }
-    // let definition = data[0].shortdef[0];// find the result
-    // definitionBox.innerText = definition;
-    // let sound_name = data[0].hwi.prs[0].sound.audio;
-    // if (sound_name) { // if sound is available
-    //     soundRender(sound_name);
-    // }
+    await getWord();
+    audioBox.innerHTML = "";
+    notFound.innerText = "";
+    definitionBox.innerText = "";
+    const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`);
+    const data = await response.json();
+    console.log(response);
+    if (!data.length) {
+        notFound.innerText = 'No result found';
+        return;
+    }
+    let definition = data[0].shortdef[0];// find the result
+    definitionBox.innerText = definition;
+    let sound_name = data[0].hwi.prs[0].sound.audio;
+    if (sound_name) { // if sound is available
+        soundRender(sound_name);
+    }
 }
 
 function setupKeyboard(){
@@ -57,7 +74,7 @@ function setupKeyboard(){
 const pushRow = () => {
     const newRow = document.createElement('div')
     newRow.setAttribute('id', 'guessRow-' + currentRow);
-    blankGuess = [];
+    let blankGuess = [];
     for (let col = 0; col < word.length; col++) {
         const newTile = document.createElement('div');
         newTile.setAttribute('id', 'guessRow-' + currentRow + '-tile-' + col);
@@ -79,9 +96,11 @@ const openModal = function () {modal.classList.remove("hidden");};
 openModalBtn.addEventListener("click", openModal);
 
 function setup(){
-    // dataGet();
-    pushRow();
-    setupKeyboard();
+    dataGet().then(function() {
+        pushRow()
+    }).then(function() {
+        setupKeyboard()
+    });
 }
 setup();
 
