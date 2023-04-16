@@ -14,7 +14,7 @@ const tileBoard = document.querySelector('.tile-container')
 
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".btn-close");
-const openModalBtn = document.querySelector(".btn-open");
+// const openModalBtn = document.querySelector(".btn-open");
 
 const keys =  [['Q','W','E','R','T','Y','U','I','O','P'], 
             ['A','S','D','F','G','H','J','K','L'], 
@@ -93,7 +93,7 @@ document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !modal.classList.contains("hidden")) {closeModal();}
 });
 const openModal = function () {modal.classList.remove("hidden");};
-openModalBtn.addEventListener("click", openModal);
+// openModalBtn.addEventListener("click", openModal);
 
 function setup(){
     dataGet().then(function() {

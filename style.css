@@ -41,15 +41,15 @@ body {
     box-shadow: 0rem .75rem 3rem rgba(0,0,0,0.66);
 }
 
-.content h2 {
+.content {
     text-align: center;
-    font-size: 30px;
-    border-bottom: 1px solid black;
-    margin-bottom: 15px;
+    font-size: 1.5rem;
+    border-bottom: 0.2rem solid black;
+    margin-bottom: 0.5rem;
 }
 
 .content .data-section {
-    padding-top: 10px;
+    padding-top: 0.2rem;
 }
 
 /*.tile-container {*/
@@ -78,11 +78,11 @@ body {
 .tile-container {
     /*  width: 330px;*/
     margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: center;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
 }
 
 .tile-container div {
