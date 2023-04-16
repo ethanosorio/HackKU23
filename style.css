@@ -78,11 +78,11 @@ body {
 .tile-container {
     /*  width: 330px;*/
     margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: center;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
 }
 
 .tile-container div {
